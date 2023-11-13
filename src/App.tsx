@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { IonApp } from '@ionic/react';
 import { Route, Redirect } from 'react-router-dom';
 import DashboardPage from './DashboardPage';
@@ -6,7 +6,11 @@ import Tab1 from './pages/Tab1';
 
 
 const App: React.FC = () => {
-  const [capturedPhoto, setCapturedPhoto] = useState<string | null>(null);
+  const [listUrlPerDish, setListUrlPerDish] = useState<Dish[] | null>(null);
+
+  useEffect(() => {
+    console.log("cambio listUrlPerDish");
+  }, [listUrlPerDish]);
 
   return (
     <IonApp className="center-container">
@@ -14,10 +18,10 @@ const App: React.FC = () => {
         <Redirect to="/tab1" />
       </Route>
       <Route exact path="/dashboard">
-        <DashboardPage capturedPhoto={capturedPhoto} />
+        <DashboardPage listUrlPerDish={listUrlPerDish} setListUrlPerDish={setListUrlPerDish} />
       </Route>
       <Route exact path="/tab1">
-        <Tab1 />
+        <Tab1 listUrlPerDish={listUrlPerDish} setListUrlPerDish={setListUrlPerDish} />
       </Route>
     </IonApp>
   );
