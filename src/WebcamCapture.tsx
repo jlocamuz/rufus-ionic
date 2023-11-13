@@ -3,11 +3,9 @@ import React, { Dispatch, SetStateAction, useState } from 'react';
 import { IonButton, IonContent, IonImg, IonPage } from '@ionic/react';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import axios from 'axios';
+import { Dish, WebcamCaptureProps } from './interfaces'; // Import the Dish interface
 
-interface WebcamCaptureProps {
-  listUrlPerDish: { lista_of_urls_perdish: string[] } | null;
-  setListUrlPerDish: Dispatch<SetStateAction<{ lista_of_urls_perdish: string[] } | null>>;
-}
+
 
 const WebcamCapture: React.FC<WebcamCaptureProps> = ({ listUrlPerDish, setListUrlPerDish }) => {
   const [imageSrc, setImageSrc] = useState<string | null>(null);
@@ -33,7 +31,7 @@ const WebcamCapture: React.FC<WebcamCaptureProps> = ({ listUrlPerDish, setListUr
         formData.append('image', blob, 'capturedImage.jpg');
 
         // Make a POST request to create a Menu object
-        const menuResponse = await axios.post('http://192.168.1.41:8000/menus/', formData, {
+        const menuResponse = await axios.post('http://192.168.0.218:8000/menus/', formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
@@ -44,9 +42,9 @@ const WebcamCapture: React.FC<WebcamCaptureProps> = ({ listUrlPerDish, setListUr
         // Update the list of URLs in the parent component
         setListUrlPerDish((prevList) => {
           if (prevList) {
-            return { lista_of_urls_perdish: [...prevList.lista_of_urls_perdish, menuResponse.data.url] };
+            return [...prevList, menuResponse.data];
           } else {
-            return { lista_of_urls_perdish: [menuResponse.data.url] };
+            return [menuResponse.data];
           }
         });
       }
