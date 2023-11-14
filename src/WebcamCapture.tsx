@@ -31,7 +31,7 @@ const WebcamCapture: React.FC<WebcamCaptureProps> = ({ listUrlPerDish, setListUr
         formData.append('image', blob, 'capturedImage.jpg');
 
         // Make a POST request to create a Menu object
-        const menuResponse = await axios.post('http://192.168.0.218:8000/menus/', formData, {
+        const menuResponse = await axios.post('http://192.168.1.40:8000/menus/', formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },

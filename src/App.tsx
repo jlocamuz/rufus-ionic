@@ -15,7 +15,7 @@ const App: React.FC = () => {
   }, [listUrlPerDish]);
 
   return (
-    <IonApp className="center-container">
+    <IonApp>
       {/* Render DashboardPage if listUrlPerDish is not null, otherwise render WebcamCapture */}
       {listUrlPerDish !== null ? (
         <Route exact path="/dashboard">

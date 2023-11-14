@@ -1,5 +1,6 @@
 // interfaces.ts
 export interface Dish {
+    lista_of_urls_perdish: any;
     model: string;
     pk: number;
     fields: {
