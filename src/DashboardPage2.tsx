@@ -261,7 +261,6 @@ const DashboardPage: React.FC = () => {
 
                             <IonCardHeader>
                                 <IonCardTitle>{dish.fields.nombre}</IonCardTitle>
-                                <IonCardSubtitle>{`ID: ${dish.pk}`}</IonCardSubtitle>
                             </IonCardHeader>
                             <IonCardContent className="my-ion-card-content">
                                 <div className="my-image-container">

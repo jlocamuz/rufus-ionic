@@ -1,9 +1,11 @@
 // WebcamCapture.tsx
 import React, { Dispatch, SetStateAction, useState } from 'react';
-import { IonButton, IonContent, IonImg, IonPage } from '@ionic/react';
+import { IonButton, IonContent, IonImg, IonItem, IonPage, IonSpinner } from '@ionic/react';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import axios from 'axios';
 import { Dish, WebcamCaptureProps } from './interfaces'; // Import the Dish interface
+import logo from './img/rufuslogo.png';
+import camara from './img/camara.png';
 
 
 
@@ -56,13 +58,20 @@ const WebcamCapture: React.FC<WebcamCaptureProps> = ({ listUrlPerDish, setListUr
   return (
     <IonPage>
       <div className='center-container'>
-        <h1>hey</h1>
+        <IonImg style={{maxWidth: '70%', margin: '40px'}} src={logo} ></IonImg>
         {imageSrc ? (
-          <IonImg src={imageSrc} alt="Captured Photo" />
+          <>
+          <IonSpinner style={{marginBottom: '40px'}}></IonSpinner>
+
+          <IonImg style={{maxWidth: '40%', filter: 'blur(5px)'}} src={imageSrc} alt="Captured Photo"/>
+          </>
+
         ) : (
-          <IonButton className="button-77" onClick={captureFromCamera}>
-            Capturar
-          </IonButton>
+          <button onClick={captureFromCamera}>
+            <IonImg src={camara}>
+
+            </IonImg>
+          </button>
         )}
       </div>
     </IonPage>
